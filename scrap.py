@@ -15,7 +15,7 @@ driver.implicitly_wait(30)
 driver.get(url)
 
 #After opening the url above, Selenium clicks the specific agency link
-python_button = driver.find_element_by_class_xpath("//*[@id="dle-content"]/div[1]/div[1]/div[1]") #clic
+python_button = driver.find_element_by_xpath("//*[@id="dle-content"]/div[1]/div[1]/div[1]") #clic
 python_button.click() #click series
 
 #Selenium hands the page source to Beautiful Soup
@@ -28,7 +28,7 @@ x = 0 #counter
 for link in soup_level1.find_all('a', id=re.compile("href")):
     
     #Selenium visits each Job Title page
-    python_button = driver.find_element_by_xpath_name("//*[@id="dle-content"]/article/div[4]/div[2]/div[10]/a[1]" + str(x))
+    python_button = driver.find_element_by_xpath("//*[@id="dle-content"]/article/div[4]/div[2]/div[10]/a[1]" + str(x))
     python_button.click() #click link
     
     #Selenium hands of the source of the specific job page to Beautiful Soup
