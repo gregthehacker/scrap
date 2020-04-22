@@ -15,8 +15,8 @@ driver.implicitly_wait(30)
 driver.get(url)
 
 #After opening the url above, Selenium clicks the specific agency link
-python_button = driver.find_element_by_class_name('mov-t nowrap') #FHSU
-python_button.click() #click fhsu link
+python_button = driver.find_element_by_class_xpath("//*[@id="dle-content"]/div[1]/div[1]/div[1]") #clic
+python_button.click() #click series
 
 #Selenium hands the page source to Beautiful Soup
 soup_level1=BeautifulSoup(driver.page_source, 'lxml')
@@ -25,17 +25,17 @@ datalist = [] #empty list
 x = 0 #counter
 
 #Beautiful Soup finds all Job Title links on the agency page and the loop begins
-for link in soup_level1.find_all('a', id=re.compile("clichost active")):
+for link in soup_level1.find_all('a', id=re.compile("href")):
     
     #Selenium visits each Job Title page
-    python_button = driver.find_element_by_class_name('clichost active' + str(x))
+    python_button = driver.find_element_by_xpath_name("//*[@id="dle-content"]/article/div[4]/div[2]/div[10]/a[1]" + str(x))
     python_button.click() #click link
     
     #Selenium hands of the source of the specific job page to Beautiful Soup
     soup_level2=BeautifulSoup(driver.page_source, 'lxml')
 
     #Beautiful Soup grabs the HTML table on the page
-    table = soup_level2.find_all('table')[0]
+    table = soup_level2.find_all('href')[0]
 
     #Giving the HTML table to pandas to put in a dataframe object
     df = pd.read_html(str(table),header=0)
